@@ -1,4 +1,19 @@
 // query selector variables go here 👇
+let posterImg = document.querySelector(".poster-img")
+let posterTitle = document.querySelector(".poster-title")
+let posterQuote = document.querySelector(".poster-quote")
+let randomPosterButton = document.querySelector(".show-random")
+let mainPoster = document.querySelector(".main-poster")
+let mainButton = document.querySelector(".show-main")
+let backToMain = document.querySelector(".back-to-main")
+let formSection = document.querySelector(".poster-form")
+let formButton = document.querySelector(".show-form")
+let savedSection = document.querySelector(".saved-posters")
+let savedButton = document.querySelector(".show-saved")
+let makePosterButton = document.querySelector(".make-poster")
+let imageURL = document.querySelector("#poster-image-url")
+let title = document.querySelector("#poster-title")
+let quote = document.querySelector("#poster-quote")
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -100,14 +115,60 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster;
+var currentPoster = createPoster(imageURL, title, quote);
 
 // event listeners go here 👇
+randomPosterButton.addEventListener("click", updatePoster)
+formButton.addEventListener("click", toggleForm)
+savedButton.addEventListener("click", toggleSaved)
+mainButton.addEventListener("click", nevermind)
+backToMain.addEventListener("click", toMain)
+// makePosterButton.addEventListener("click", currentPoster(event)){
+//   event.preventDefault()
+// }
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
+
+
+
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
+}
+
+function updatePoster() {
+  let randomImage = images[getRandomIndex(images)];
+  let randomTitle = titles[getRandomIndex(titles)];
+  let randomQuote = quotes[getRandomIndex(quotes)];
+
+  posterImg.src = randomImage;
+  posterTitle.innerText = randomTitle; 
+  posterQuote.innerText = randomQuote;
+}
+
+window.onload = updatePoster;
+
+function toggleForm() {
+    formSection.classList.remove("hidden") 
+    mainPoster.classList.add("hidden")
+    console.log(formSection)
+}
+
+function toggleSaved() {
+  savedSection.classList.remove("hidden")
+  mainPoster.classList.add("hidden")
+
+  console.log(savedSection)
+}
+
+function nevermind() {
+  mainPoster.classList.remove("hidden")
+  formSection.classList.add("hidden")
+}
+
+function toMain() {
+  mainPoster.classList.remove("hidden")
+  savedSection.classList.add("hidden")
 }
 
 function createPoster(imageURL, title, quote) {
@@ -117,3 +178,24 @@ function createPoster(imageURL, title, quote) {
     title: title, 
     quote: quote}
 }
+
+function newPoster() {
+  createPoster();
+  imageURL.src = imageInput.value; 
+  title.innerText = titleInput.value; 
+  quote.innerText = quoteInput.value; 
+}
+
+// we need to activate the Show My Poster button.
+// make sure that we are using the event.preventDefault() to keep the page from refreshing. 
+// create a global variable of currentPoster
+// add the image, quote and title to their respective arrays
+// hide the savedSection and unhide the main page
+// display the newly created poster on the main page
+
+// console.log("quotes: ", quotes)
+
+
+
+// console.log("savedPosters: ", savedPosters)
+
