@@ -14,6 +14,10 @@ let makePosterButton = document.querySelector(".make-poster")
 let imageURL = document.querySelector("#poster-image-url")
 let title = document.querySelector("#poster-title")
 let quote = document.querySelector("#poster-quote")
+let savePosterButton = document.querySelector(".save-poster")
+let savedPostersGrid = document.querySelector(".saved-posters-grid")
+let posterClass = document.querySelector(".poster")
+let unmotivationalBtn = document.querySelector(".unmotivational-button")
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -115,22 +119,32 @@ var quotes = [
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
 var savedPosters = [];
-var currentPoster = createPoster(imageURL, title, quote);
+var currentPoster = {
+  
+}
+console.log(currentPoster)
+window.addEventListener("load", function(){
+  updatePoster();
+  createUnmotivationalButton();
+})
+
 
 // event listeners go here 👇
 randomPosterButton.addEventListener("click", updatePoster)
 formButton.addEventListener("click", toggleForm)
-savedButton.addEventListener("click", toggleSaved)
 mainButton.addEventListener("click", nevermind)
 backToMain.addEventListener("click", toMain)
-// makePosterButton.addEventListener("click", currentPoster(event)){
-//   event.preventDefault()
-// }
+savePosterButton.addEventListener("click", saveCurrentPoster)
+makePosterButton.addEventListener("click", newPoster)
+savedButton.addEventListener("click", function() {
+  toggleSaved()
+  displaySavedPosters()
+}
+);
+unmotivationalBtn.addEventListener("click", toggleUnmotivational)
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
-
-
 
 function getRandomIndex(array) {
   return Math.floor(Math.random() * array.length);
@@ -145,8 +159,6 @@ function updatePoster() {
   posterTitle.innerText = randomTitle; 
   posterQuote.innerText = randomQuote;
 }
-
-window.onload = updatePoster;
 
 function toggleForm() {
     formSection.classList.remove("hidden") 
@@ -174,24 +186,106 @@ function toMain() {
 function createPoster(imageURL, title, quote) {
   return {
     id: Date.now(), 
-    imageURL: imageURL, 
-    title: title, 
-    quote: quote}
+    imageURL: imageURL.value, 
+    title: title.value, 
+    quote: quote.value
+  }
 }
 
-function newPoster() {
-  createPoster();
-  imageURL.src = imageInput.value; 
-  title.innerText = titleInput.value; 
-  quote.innerText = quoteInput.value; 
+function newPoster(event) {
+  event.preventDefault(); 
+  currentPoster = createPoster(imageURL, title, quote);
+  displayCurrentPoster();
+  addNewPosterToArray();
+  changeDisplay();
+  console.log(currentPoster)
+}
+// refactor: maybe create one function that executes individually and put them into an event listener. 
+// more updating not creating 
+
+function displayCurrentPoster() {
+  posterImg.src = currentPoster.imageURL;
+  posterTitle.innerText = currentPoster.title;
+  posterQuote.innerText = currentPoster.quote;
 }
 
-// we need to activate the Show My Poster button.
-// make sure that we are using the event.preventDefault() to keep the page from refreshing. 
-// create a global variable of currentPoster
-// add the image, quote and title to their respective arrays
-// hide the savedSection and unhide the main page
-// display the newly created poster on the main page
+function addNewPosterToArray() {
+  images.push(currentPoster.imageURL);
+  titles.push(currentPoster.title);
+  quotes.push(currentPoster.quote);
+}
+
+function changeDisplay() {
+  mainPoster.classList.remove("hidden");
+  formSection.classList.add("hidden");
+}
+
+function saveCurrentPoster() {
+  let alreadySaved = savedPosters.some(poster => 
+    poster.imageURL === posterImg.src && 
+    poster.title === posterTitle.innerText && 
+    poster.quote === posterQuote.innerText
+  );
+
+  if (!alreadySaved) {
+    let newPoster = {
+      id: Date.now(),
+      imageURL: posterImg.src,
+      title: posterTitle.innerText, 
+      quote: posterQuote.innerText
+    };
+    savedPosters.push(newPoster);
+    // alert("Hooray! Your poster has been saved!") 
+    console.log("Poster Saved!", savedPosters)
+  }
+  else {
+    alert("Looks like you already saved this poster!")
+    console.log("Poster is already saved!")
+  }
+}
+
+function displaySavedPosters() {
+  savedPostersGrid.innerHTML = "";
+  savedPosters.forEach(poster => {
+    let miniPoster = document.createElement("div");
+    miniPoster.classList.add("mini-poster");
+
+    let miniImg = document.createElement("img");
+    miniImg.src = poster.imageURL;
+    miniImg.classList.add("saved-posters-grid", "mini-poster");
+
+    let miniTile = document.createElement("h2");
+    miniTile.innerText = poster.title;
+    // miniTile.classList.add("mini-poster", "saved-posters-grid");
+
+    let miniQuote = document.createElement("h4");
+    miniQuote.innerText = poster.quote;
+    // miniQuote.classList.add("mini-poster", "saved-posters-grid");
+
+    miniPoster.append(miniImg, miniTile, miniQuote);
+
+    savedPostersGrid.appendChild(miniPoster)
+    console.log("It's workingggggg!!")
+  });
+}
+
+// function createUnmotivationalButton() {
+//   let unmotivationalButton = document.createElement("button");
+//   unmotivationalButton.textContent = "Unmotivational Posters";
+//   unmotivationalButton.classList.add("unmotivational-button");
+//   mainPoster.appendChild(unmotivationalButton);
+// }
+
+function toggleUnmotivational() {
+  mainPoster.classList.remove("hidden")
+  unmotivationalPage.classList.add("hidden")
+  console.log("is it working??")
+}
+
+function unmotivationalPage() {
+  // toggleUnmotivational
+  let unmotivationalTitle = document.createElement("section");
+}
 
 // console.log("quotes: ", quotes)
 
