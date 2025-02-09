@@ -17,7 +17,10 @@ let quote = document.querySelector("#poster-quote")
 let savePosterButton = document.querySelector(".save-poster")
 let savedPostersGrid = document.querySelector(".saved-posters-grid")
 let posterClass = document.querySelector(".poster")
-let unmotivationalBtn = document.querySelector(".unmotivational-button")
+let unmotivationalBtn = document.querySelector(".show-unmotivational")
+let unmotivationalPage = document.querySelector(".unmotivational-posters")
+let sadToMain = document.querySelector(".sad-to-main")
+let unmotivationalGrid = document.querySelector(".unmotiavtional-posters-grid")
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -118,6 +121,128 @@ var quotes = [
   "Each person must live their life as a model for others.",
   "A champion is defined not by their wins but by how they can recover when they fall."
 ];
+var unmotivationalPosters = [
+  {
+    name: "FAILURE",
+    description: "Why bother trying? It's probably not worth it.",
+    price: 68.00,
+    year: 2019,
+    vintage: true,
+    img_url: "./assets/failure.jpg",
+  },
+  {
+    name: "MEDIOCRITY",
+    description: "Dreams are just that—dreams.",
+    price: 127.00,
+    year: 2021,
+    vintage: false,
+    img_url: "./assets/mediocrity.jpg",
+  },
+  {
+    name: "REGRET",
+    description: "Hard work rarely pays off.",
+    price: 89.00,
+    year: 2018,
+    vintage: true,
+    img_url:  "./assets/regret.jpg",
+  },
+  {
+    name: "FUTILITY",
+    description: "You're not good enough.",
+    price: 150.00,
+    year: 2016,
+    vintage: false,
+    img_url:  "./assets/futility.jpg",
+  },
+  {
+    name: "DEFEAT",
+    description: "It's too late to start now.",
+    price: 35.00,
+    year: 2023,
+    vintage: false,
+    img_url:  "./assets/defeat.jpg",
+  },
+  {
+    name: "HOPELESSNESS",
+    description: "Stay in your comfort zone; it's safer.",
+    price: 112.00,
+    year: 2020,
+    vintage: true,
+    img_url: "./assets/hopelessness.jpg",
+  },
+  {
+    name: "LAZINESS",
+    description: "You can't change anything.",
+    price: 25.00,
+    year: 2022,
+    vintage: false,
+    img_url: "./assets/laziness.jpg",
+  },
+  {
+    name: "PROCRASTINATION",
+    description: "Better to avoid failure by not trying at all.",
+    price: 48.00,
+    year: 2017,
+    vintage: true,
+    img_url: "./assets/procrastination.jpg",
+  },
+  {
+    name: "DESPAIR",
+    description: "Let someone else do it; you’ll just mess it up.",
+    price: 73.00,
+    year: 2015,
+    vintage: false,
+    img_url: "./assets/despair.jpg",
+  },
+  {
+    name: "NEGLECT",
+    description: "Happiness is overrated.",
+    price: 160.00,
+    year: 2019,
+    vintage: true,
+    img_url: "./assets/neglect.jpg",
+  },
+  {
+    name: "FEAR",
+    description: "Giving up is always an option.",
+    price: 91.00,
+    year: 2014,
+    vintage: false,
+    img_url: "./assets/fear.jpg",
+  },
+  {
+    name: "APATHY",
+    description: "No one cares about your effort.",
+    price: 110.00,
+    year: 2016,
+    vintage: true,
+    img_url: "./assets/apathy.jpg",
+  },
+  {
+    name: "MISERY",
+    description: "Why take risks when you can stay stagnant?",
+    price: 55.00,
+    year: 2021,
+    vintage: false,
+    img_url: "./assets/misery.jpg",
+  },
+  {
+    name: "BLAME",
+    description: "Expect disappointment and you'll never be disappointed.",
+    price: 39.00,
+    year: 2017,
+    vintage: true,
+    img_url: "./assets/blame.jpg",
+  },
+  {
+    name: "DOUBT",
+    description: "Success is for other people, not you.",
+    price: 140.00,
+    year: 2020,
+    vintage: false,
+    img_url: "./assets/doubt.jpg",
+  }
+];
 var savedPosters = [];
 var currentPoster = {
   
@@ -125,7 +250,7 @@ var currentPoster = {
 console.log(currentPoster)
 window.addEventListener("load", function(){
   updatePoster();
-  createUnmotivationalButton();
+  // createUnmotivationalButton();
 })
 
 
@@ -142,6 +267,7 @@ savedButton.addEventListener("click", function() {
 }
 );
 unmotivationalBtn.addEventListener("click", toggleUnmotivational)
+sadToMain.addEventListener("click", unmotivationalToMain)
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -161,26 +287,44 @@ function updatePoster() {
 }
 
 function toggleForm() {
-    formSection.classList.remove("hidden") 
-    mainPoster.classList.add("hidden")
-    console.log(formSection)
+    formSection.classList.remove("hidden");
+    mainPoster.classList.add("hidden");
+    console.log(formSection);
 }
 
 function toggleSaved() {
-  savedSection.classList.remove("hidden")
-  mainPoster.classList.add("hidden")
-
+  savedSection.classList.remove("hidden");
+  mainPoster.classList.add("hidden");
   console.log(savedSection)
 }
 
 function nevermind() {
-  mainPoster.classList.remove("hidden")
-  formSection.classList.add("hidden")
+  mainPoster.classList.remove("hidden");
+  formSection.classList.add("hidden");
 }
 
 function toMain() {
-  mainPoster.classList.remove("hidden")
-  savedSection.classList.add("hidden")
+  mainPoster.classList.remove("hidden");
+  savedSection.classList.add("hidden");
+  unmotivationalPage.classList.add("hidden");
+}
+
+function changeDisplay() {
+  mainPoster.classList.remove("hidden");
+  formSection.classList.add("hidden");
+}
+
+function toggleUnmotivational() {
+  mainPoster.classList.add("hidden");
+  unmotivationalPage.classList.remove("hidden");
+  cleanDataFunction();
+  console.log("is it working??")
+}
+
+function unmotivationalToMain() {
+  mainPoster.classList.remove("hidden");
+  unmotivationalPage.classList.add("hidden");
+  console.log("did you click?")
 }
 
 function createPoster(imageURL, title, quote) {
@@ -213,11 +357,6 @@ function addNewPosterToArray() {
   images.push(currentPoster.imageURL);
   titles.push(currentPoster.title);
   quotes.push(currentPoster.quote);
-}
-
-function changeDisplay() {
-  mainPoster.classList.remove("hidden");
-  formSection.classList.add("hidden");
 }
 
 function saveCurrentPoster() {
@@ -269,23 +408,22 @@ function displaySavedPosters() {
   });
 }
 
-// function createUnmotivationalButton() {
-//   let unmotivationalButton = document.createElement("button");
-//   unmotivationalButton.textContent = "Unmotivational Posters";
-//   unmotivationalButton.classList.add("unmotivational-button");
-//   mainPoster.appendChild(unmotivationalButton);
+function cleanDataFunction() {
+  let counter = 0;
+  let cleanedPosters = unmotivationalPosters.map(poster => ({
+    id: counter++,
+    imageURL: poster.img_url, 
+    title: poster.name, 
+    quote: poster.description
+  }));
+  console.log(cleanedPosters)
+}
+
+// displayCleanedPosters() {
+
 // }
 
-function toggleUnmotivational() {
-  mainPoster.classList.remove("hidden")
-  unmotivationalPage.classList.add("hidden")
-  console.log("is it working??")
-}
 
-function unmotivationalPage() {
-  // toggleUnmotivational
-  let unmotivationalTitle = document.createElement("section");
-}
 
 // console.log("quotes: ", quotes)
 
