@@ -247,9 +247,10 @@ var unmotivationalPosters = [
 var cleanedUnmotivationalPosters = [];
 var savedPosters = [];
 
-var currentPoster = {
-  
-}
+var currentPoster = {}
+
+var postersDeleted = false
+
 console.log(currentPoster)
 window.addEventListener("load", function(){
   updatePoster();
@@ -426,13 +427,15 @@ function displaySavedPosters() {
 }
 
 function cleanDataFunction() {
-  let counter = 0;
-  cleanedUnmotivationalPosters = unmotivationalPosters.map(poster => ({
-    id: counter++,
-    imageURL: poster.img_url, 
-    title: poster.name, 
-    quote: poster.description
-  }));
+  if (cleanedUnmotivationalPosters.length === 0 && !postersDeleted) {
+    let counter = 0;
+    cleanedUnmotivationalPosters = unmotivationalPosters.map(poster => ({
+      id: counter++,
+      imageURL: poster.img_url, 
+      title: poster.name, 
+      quote: poster.description
+    }));
+  }
   console.log(cleanedUnmotivationalPosters)
 }
 
@@ -464,14 +467,10 @@ function deletePoster(posterID) {
   let index = cleanedUnmotivationalPosters.findIndex((poster) => {
     return poster.id === posterID
   });
-  
   if (index !== -1) {
     cleanedUnmotivationalPosters.splice(index, 1);
-
-    console.log(`Deleted poster with ID: ${posterID}}`);
-  } else {
-    console.log("Poster not found.");
   }
+  postersDeleted = true
   console.log(cleanedUnmotivationalPosters)
 }
 
