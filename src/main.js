@@ -2,26 +2,28 @@
 let posterImg = document.querySelector(".poster-img")
 let posterTitle = document.querySelector(".poster-title")
 let posterQuote = document.querySelector(".poster-quote")
-let randomPosterButton = document.querySelector(".show-random")
-let mainPoster = document.querySelector(".main-poster")
-let mainButton = document.querySelector(".show-main")
-let backToMain = document.querySelector(".back-to-main")
-let formSection = document.querySelector(".poster-form")
-let formButton = document.querySelector(".show-form")
-let savedSection = document.querySelector(".saved-posters")
-let savedButton = document.querySelector(".show-saved")
-let makePosterButton = document.querySelector(".make-poster")
 let imageURL = document.querySelector("#poster-image-url")
 let title = document.querySelector("#poster-title")
 let quote = document.querySelector("#poster-quote")
+
+let makePosterButton = document.querySelector(".make-poster")
+let randomPosterButton = document.querySelector(".show-random")
+let mainButton = document.querySelector(".show-main")
+let formButton = document.querySelector(".show-form")
+let savedButton = document.querySelector(".show-saved")
 let savePosterButton = document.querySelector(".save-poster")
+let unmotivationalBtn = document.querySelector(".show-unmotivational")
+let backToMain = document.querySelector(".back-to-main")
+let sadToMain = document.querySelector(".sad-to-main")
+
+let mainPoster = document.querySelector(".main-poster")
+let formSection = document.querySelector(".poster-form")
+let savedSection = document.querySelector(".saved-posters")
 let savedPostersGrid = document.querySelector(".saved-posters-grid")
 let posterClass = document.querySelector(".poster")
-let unmotivationalBtn = document.querySelector(".show-unmotivational")
 let unmotivationalPage = document.querySelector(".unmotivational-posters")
-let sadToMain = document.querySelector(".sad-to-main")
 let unmotivationalGrid = document.querySelector(".unmotivational-posters-grid")
-// let miniPosterClass = document.querySelectorAll(".mini-poster")
+
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -245,18 +247,14 @@ var unmotivationalPosters = [
   }
 ];
 var cleanedUnmotivationalPosters = [];
+
 var savedPosters = [];
 
-var currentPoster = {}
+var currentPoster 
 
 var postersDeleted = false
 
-console.log(currentPoster)
-window.addEventListener("load", function(){
-  updatePoster();
-  // createUnmotivationalButton();
-})
-
+window.addEventListener("load",updatePoster)
 
 // event listeners go here 👇
 randomPosterButton.addEventListener("click", updatePoster)
@@ -269,8 +267,7 @@ sadToMain.addEventListener("click", unmotivationalToMain)
 savedButton.addEventListener("click", function() {
   toggleSaved()
   displaySavedPosters()
-}
-);
+});
 
 unmotivationalBtn.addEventListener("click", function(event) {
   cleanDataFunction(),
@@ -286,7 +283,6 @@ unmotivationalGrid.addEventListener("dblclick", function(event) {
     posterElement.remove(); // Remove from the DOM
   }
 });
-// posterElement.dataset.dataID
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -308,13 +304,11 @@ function updatePoster() {
 function toggleForm() {
     formSection.classList.remove("hidden");
     mainPoster.classList.add("hidden");
-    console.log(formSection);
 }
 
 function toggleSaved() {
   savedSection.classList.remove("hidden");
   mainPoster.classList.add("hidden");
-  console.log(savedSection)
 }
 
 function nevermind() {
@@ -336,13 +330,11 @@ function changeDisplay() {
 function toggleUnmotivational() {
   mainPoster.classList.add("hidden");
   unmotivationalPage.classList.remove("hidden");
-  console.log("is it working??")
 }
 
 function unmotivationalToMain() {
   mainPoster.classList.remove("hidden");
   unmotivationalPage.classList.add("hidden");
-  console.log("did you click?")
 }
 
 function createPoster(imageURL, title, quote) {
@@ -360,10 +352,8 @@ function newPoster(event) {
   displayCurrentPoster();
   addNewPosterToArray();
   changeDisplay();
-  console.log(currentPoster)
 }
-// refactor: maybe create one function that executes individually and put them into an event listener. 
-// more updating not creating 
+
 
 function displayCurrentPoster() {
   posterImg.src = currentPoster.imageURL;
@@ -413,11 +403,10 @@ function displaySavedPosters() {
 
     let miniTile = document.createElement("h2");
     miniTile.innerText = poster.title;
-    // miniTile.classList.add("mini-poster", "saved-posters-grid");
 
     let miniQuote = document.createElement("h4");
     miniQuote.innerText = poster.quote;
-    // miniQuote.classList.add("mini-poster", "saved-posters-grid");
+
 
     miniPoster.append(miniImg, miniTile, miniQuote);
 
@@ -436,7 +425,6 @@ function cleanDataFunction() {
       quote: poster.description
     }));
   }
-  console.log(cleanedUnmotivationalPosters)
 }
 
 function displayCleanedPosters() {
@@ -459,7 +447,6 @@ function displayCleanedPosters() {
     sadPosters.append(sadImage, sadTitle, sadQuote);
 
     unmotivationalGrid.appendChild(sadPosters)
-    console.log("It's workingggggg!!")
   });
 }
 
@@ -471,31 +458,4 @@ function deletePoster(posterID) {
     cleanedUnmotivationalPosters.splice(index, 1);
   }
   postersDeleted = true
-  console.log(cleanedUnmotivationalPosters)
 }
-
-
-// cleanedUnmotivationalPosters.forEach((poster) => {
-//   let sadPosterByID = poster.id
-//   console.log(sadPosterByID)
-// })
-// splice(x, # to delete)
-
-// console.log("quotes: ", quotes)
-
-// console.log("savedPosters: ", savedPosters)
-
-
-// cleanedUnmotivationalPosters.forEach((poster) => {
-//   if (!deletedPosters.includes(poster.id)) {
-//     let sadPoster = document.createElement("div");
-//     sadPoster.classList.add("sad-mini-poster");
-//     sadPoster.setAttribute("data-id", poster.id);
-//     sadPoster.textContent = poster.title;
-//     unmotivationalGrid.appendChild(sadPoster)
-//   }
-// });
-
-// var deletedPosters = []
-
-// deletedPosters.push(posterID);
