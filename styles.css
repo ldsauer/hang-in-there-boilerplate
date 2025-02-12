@@ -124,6 +124,7 @@ button:hover {
   width: 425px;
 }
 
+.sad-mini-poster img,
 .mini-poster img {
   height:200px;
   width: 300px;
@@ -143,4 +144,37 @@ button:hover {
   letter-spacing: 5px;
   margin-bottom: 10px;
   text-transform: uppercase;
+}
+
+.sad-mini-poster {
+  display: flex;
+  background: gray;
+  color: white;
+  height: 340px;
+  padding: 25px;
+  width: 375px;
+  flex-wrap: wrap;
+  flex-direction: column;
+  border-radius: 4%;
+  margin: 0px;
+}
+
+.sad-mini-poster h2 {
+  display: flex;
+  color: black;
+}
+
+.sad-mini-poster h4 {
+  display: flex; 
+  color: white;
+}
+
+.unmotivational-posters-grid {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: row;
+  justify-content: center;
+  align-content: space-around;
+  gap: 10px;
+  padding: 20px;
 }

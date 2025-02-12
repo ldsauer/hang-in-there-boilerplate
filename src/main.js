@@ -21,6 +21,7 @@ let unmotivationalBtn = document.querySelector(".show-unmotivational")
 let unmotivationalPage = document.querySelector(".unmotivational-posters")
 let sadToMain = document.querySelector(".sad-to-main")
 let unmotivationalGrid = document.querySelector(".unmotivational-posters-grid")
+// let miniPosterClass = document.querySelectorAll(".mini-poster")
 
 // we've provided you with some data to work with 👇
 // tip: you can tuck this data out of view with the dropdown found near the line number where the variable is declared 
@@ -268,11 +269,22 @@ savedButton.addEventListener("click", function() {
   displaySavedPosters()
 }
 );
+
 unmotivationalBtn.addEventListener("click", function(event) {
   cleanDataFunction(),
   displayCleanedPosters(),
   toggleUnmotivational()
 })
+
+unmotivationalGrid.addEventListener("dblclick", function(event) {
+  let posterElement = event.target.closest(".sad-mini-poster"); // Find the closest poster div
+  if (posterElement) {
+    let posterID = Number(posterElement.getAttribute("data-id")); // Convert to number
+    deletePoster(posterID);
+    posterElement.remove(); // Remove from the DOM
+  }
+});
+// posterElement.dataset.dataID
 
 // functions and event handlers go here 👇
 // (we've provided two to get you started)!
@@ -322,7 +334,6 @@ function changeDisplay() {
 function toggleUnmotivational() {
   mainPoster.classList.add("hidden");
   unmotivationalPage.classList.remove("hidden");
-  cleanDataFunction();
   console.log("is it working??")
 }
 
@@ -337,7 +348,7 @@ function createPoster(imageURL, title, quote) {
     id: Date.now(), 
     imageURL: imageURL.value, 
     title: title.value, 
-    quote: quote.value
+    quote: quote.value,
   }
 }
 
@@ -421,7 +432,6 @@ function cleanDataFunction() {
     title: poster.name, 
     quote: poster.description
   }));
-
   console.log(cleanedUnmotivationalPosters)
 }
 
@@ -429,7 +439,8 @@ function displayCleanedPosters() {
   unmotivationalGrid.innerHTML = ""; 
   cleanedUnmotivationalPosters.forEach(poster => {
     let sadPosters = document.createElement("div"); 
-    sadPosters.classList.add("mini-poster");
+    sadPosters.classList.add("sad-mini-poster");
+    sadPosters.setAttribute("data-id", poster.id)
 
     let sadImage = document.createElement("img");
     sadImage.src = poster.imageURL;
@@ -448,17 +459,26 @@ function displayCleanedPosters() {
   });
 }
 
+function deletePoster(posterID) { 
+  let index = cleanedUnmotivationalPosters.findIndex((poster) => {
+    return poster.id === posterID
+  });
+  
+  if (index !== -1) {
+    cleanedUnmotivationalPosters.splice(index, 1);
+  //   // console.log(`Deleted poster with ID: ${posterID}}`);
+  // } else {
+  //   // console.log("Poster not found.");
+  }
+  console.log(cleanedUnmotivationalPosters)
+}
 
-// iteration 5: 
-// doubleclick ANYWHERE on the poster to delete it "permantely" from the page. 
-// we will be creating a .eventListnener("dblclick", function)
-// the function in the eventListener will go into the cleanedUnmotivationalPosters array and remove it
-//  completely from the array so that it no longer displays until the page is refreshed. 
 
-
-
-
-
+// cleanedUnmotivationalPosters.forEach((poster) => {
+//   let sadPosterByID = poster.id
+//   console.log(sadPosterByID)
+// })
+// splice(x, # to delete)
 
 // console.log("quotes: ", quotes)
 
