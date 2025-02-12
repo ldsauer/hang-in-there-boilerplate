@@ -246,6 +246,7 @@ var unmotivationalPosters = [
 ];
 var cleanedUnmotivationalPosters = [];
 var savedPosters = [];
+
 var currentPoster = {
   
 }
@@ -466,9 +467,10 @@ function deletePoster(posterID) {
   
   if (index !== -1) {
     cleanedUnmotivationalPosters.splice(index, 1);
-  //   // console.log(`Deleted poster with ID: ${posterID}}`);
-  // } else {
-  //   // console.log("Poster not found.");
+
+    console.log(`Deleted poster with ID: ${posterID}}`);
+  } else {
+    console.log("Poster not found.");
   }
   console.log(cleanedUnmotivationalPosters)
 }
@@ -484,3 +486,17 @@ function deletePoster(posterID) {
 
 // console.log("savedPosters: ", savedPosters)
 
+
+// cleanedUnmotivationalPosters.forEach((poster) => {
+//   if (!deletedPosters.includes(poster.id)) {
+//     let sadPoster = document.createElement("div");
+//     sadPoster.classList.add("sad-mini-poster");
+//     sadPoster.setAttribute("data-id", poster.id);
+//     sadPoster.textContent = poster.title;
+//     unmotivationalGrid.appendChild(sadPoster)
+//   }
+// });
+
+// var deletedPosters = []
+
+// deletedPosters.push(posterID);
