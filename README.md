@@ -13,7 +13,6 @@
 
 ### Preview of App:
 ![Project Preview](assets/Poster_Project_GIF.gif)
--Okay I think I was able to upload my gif on here. If not I do apologize! I have 
 [//]: <> (Provide ONE gif or screenshot of your application - choose the "coolest" piece of functionality to show off. gifs preferred!)
 
 ### Context:
