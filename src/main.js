@@ -407,9 +407,7 @@ function displaySavedPosters() {
     let miniQuote = document.createElement("h4");
     miniQuote.innerText = poster.quote;
 
-
     miniPoster.append(miniImg, miniTile, miniQuote);
-
     savedPostersGrid.appendChild(miniPoster)
     console.log("It's workingggggg!!")
   });
@@ -445,7 +443,6 @@ function displayCleanedPosters() {
     sadQuote.innerText = poster.quote;
 
     sadPosters.append(sadImage, sadTitle, sadQuote);
-
     unmotivationalGrid.appendChild(sadPosters)
   });
 }
