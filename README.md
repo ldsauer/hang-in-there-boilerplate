@@ -3,12 +3,12 @@
 # Hang in There  
 
 ### Abstract: 
--In this project we built an app that on load displays a random image, title and quote on the home page. We also have a button that will give us a new random poster, title and quote. The save this poster button saves the currently displayed poster into an array so that when you click on the show saved posters button it takes you to a new page that shows all of the posters that you have saved. There is also a make your own poster button that allows you uto upload your own image, title and quote and display it on the main page. You can also save your created poster to the saved posters array. Finally we added an Unmotivational Posters button that takes you to a new page that has 15 other unmotivational posters. Within this page you can double click on the poster and it will delete that poster. 
+- In this project we built an app that on load displays a random image, title and quote on the home page. We also have a button that will give us a new random poster, title and quote. The save this poster button saves the currently displayed poster into an array so that when you click on the show saved posters button it takes you to a new page that shows all of the posters that you have saved. There is also a make your own poster button that allows you uto upload your own image, title and quote and display it on the main page. You can also save your created poster to the saved posters array. Finally we added an Unmotivational Posters button that takes you to a new page that has 15 other unmotivational posters. Within this page you can double click on the poster and it will delete that poster. 
 
 [//]: <> (Briefly describe what you built and its features. What problem is the app solving? How does this application solve that problem?)
 
 ### Installation Instructions:
--To clone down the app and get it running one would have to go to my personal GitHub page and my repos and get the SSH code. Once you have that open your terminal, open up whatever directory you would like the application to be stored in and then use `git clone <ssh URL>` and then `code .` to open up your text editor. Once inside the application, run `open html.index` to open up the webpage in a browser. 
+- To clone down the app and get it running one would have to go to my personal GitHub page and my repos and get the SSH code. Once you have that open your terminal, open up whatever directory you would like the application to be stored in and then use `git clone <ssh URL>` and then `code .` to open up your text editor. Once inside the application, run `open html.index` to open up the webpage in a browser. 
 
 [//]: <> (What steps does a person have to take to get your app cloned down and running?)
 
